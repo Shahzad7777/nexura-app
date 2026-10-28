@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Admin Command Center | NEXURA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-page-wrap { position: relative; z-index: 10; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .admin-card { background: #FFFFFF; border: 1px solid var(--sage-border); border-radius: 14px; box-shadow: var(--shadow-hover); overflow: hidden; }
+    .admin-header-bar { background: var(--brand-pine); color: #FFFFFF; padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; }
+    .admin-stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; padding: 20px 28px; background: var(--bg-secondary); border-bottom: 1px solid var(--sage-border); }
+    .admin-stat-box { background: #FFFFFF; border: 1px solid var(--sage-border); padding: 14px 18px; border-radius: 10px; display: flex; align-items: center; gap: 12px; }
+    .admin-stat-val { font-size: 1.4rem; font-weight: 800; color: var(--brand-ebony); }
+    .admin-nav-tabs { display: flex; gap: 8px; padding: 14px 28px 0; border-bottom: 1px solid var(--sage-border); overflow-x: auto; }
+    .admin-tab-btn { padding: 10px 18px; font-weight: 600; background: transparent; border: none; border-bottom: 3px solid transparent; cursor: pointer; }
+    .admin-tab-btn.active { color: var(--sage-brand); border-bottom-color: var(--mint-primary); background: var(--bg-tertiary); }
+    .admin-tab-content { padding: 28px; }
+    .admin-tab-pane { display: none; }
+    .admin-tab-pane.active { display: block; }
+    .item-crud-card { border: 1px solid var(--sage-border); border-radius: 10px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .edit-modal-overlay { position: fixed; inset: 0; background: rgba(17,23,20,0.7); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .edit-modal-overlay.open { display: flex; }
+    .edit-modal-box { background: #FFFFFF; border-radius: 14px; max-width: 600px; width: 100%; padding: 26px; }
+  </style>
+</head>
+<body>
+  <canvas id="ambient-network-canvas"></canvas>
+  
+  <header class="glass-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-monogram">
+        <div class="brand-surge-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19L9 5L14 14L18 8L20 10L14 19L9 10L6 19H4Z" /></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">NEXURA</span>
+          <span class="brand-sub">Tech & Business Acceleration</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item ">Home</a>
+        <a href="webapps.html" class="nav-item ">Web Apps</a>
+        <a href="marketing.html" class="nav-item ">Marketing</a>
+        <a href="graphics.html" class="nav-item ">Graphic Design</a>
+        <a href="ai-automation.html" class="nav-item ">AI Automation</a>
+        <a href="portfolio.html" class="nav-item ">Case Studies</a>
+        <a href="pricing.html" class="nav-item ">Pricing ($400-$500)</a>
+        <a href="blogs.html" class="nav-item ">Blogs</a>
+        <a href="privacy.html" class="nav-item ">Privacy Policy</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="admin.html" class="btn-admin-pill"><i class="fa-solid fa-sliders"></i> Admin Portal</a>
+        <a href="pricing.html" class="btn-mint-glow">Start Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </header>
+  <main class="admin-page-wrap">
+    <div id="admin-auth-gate" class="admin-card" style="max-width:450px; margin:50px auto; padding:36px; text-align:center;">
+      <h2 style="font-family:var(--font-display); margin-bottom:8px;">Executive Command Gate</h2>
+      <p style="font-size:0.86rem; margin-bottom:20px;">Enter Master Key (Default: <code>nexura2026</code>)</p>
+      <form id="auth-form" style="display:flex; flex-direction:column; gap:12px;">
+        <input type="password" id="auth-key-input" placeholder="nexura2026" class="form-input" style="text-align:center;" required>
+        <button type="submit" class="btn-mint-glow" style="justify-content:center;">Unlock Console</button>
+      </form>
+      <div id="auth-error-msg" style="color:var(--accent-alert); font-size:0.82rem; margin-top:10px; display:none;">Invalid Master Key</div>
+    </div>
+
+    <div id="admin-main-workspace" class="admin-card" style="display:none;">
+      <div class="admin-header-bar">
+        <h2 style="font-family:var(--font-display); font-size:1.3rem;">Nexura Command Center</h2>
+        <button id="btn-lock-console" class="btn-sage-outline" style="color:#FFFFFF; border-color:rgba(255,255,255,0.4);">Lock Console</button>
+      </div>
+      <div class="admin-stats-bar">
+        <div class="admin-stat-box"><div><div id="stat-proj-count" class="admin-stat-val">0</div><small>Projects</small></div></div>
+        <div class="admin-stat-box"><div><div id="stat-blog-count" class="admin-stat-val">0</div><small>Articles</small></div></div>
+        <div class="admin-stat-box"><div><div id="stat-inq-count" class="admin-stat-val">0</div><small>Inquiries</small></div></div>
+        <div class="admin-stat-box"><div><div id="stat-launchpad-val" class="admin-stat-val">$400</div><small>Base Price</small></div></div>
+      </div>
+      <div class="admin-nav-tabs">
+        <button class="admin-tab-btn active" data-tab="tab-projects">1. Projects CRUD</button>
+        <button class="admin-tab-btn" data-tab="tab-blogs">2. Blogs Publisher</button>
+        <button class="admin-tab-btn" data-tab="tab-inquiries">3. Inquiries & Replies</button>
+        <button class="admin-tab-btn" data-tab="tab-settings">4. Global Settings</button>
+      </div>
+      <div class="admin-tab-content">
+        <div id="tab-projects" class="admin-tab-pane active">
+          <form id="form-new-project" style="background:var(--bg-secondary); padding:18px; border-radius:10px; margin-bottom:20px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <input type="text" id="new-p-title" class="form-input" placeholder="Project Title" required>
+            <select id="new-p-cat" class="form-select"><option value="webapps">Web Apps</option><option value="ecommerce">DTC eCommerce</option><option value="marketing">Marketing</option></select>
+            <input type="text" id="new-p-tagline" class="form-input" placeholder="Tagline" required>
+            <input type="text" id="new-p-url" class="form-input" placeholder="Live URL">
+            <textarea id="new-p-solution" class="form-input" style="grid-column:1/-1;" placeholder="Engineered Solution" required></textarea>
+            <button type="submit" class="btn-mint-glow" style="grid-column:1/-1; justify-content:center;">+ Add Project Live</button>
+          </form>
+          <div id="projects-list-container"></div>
+        </div>
+
+        <div id="tab-blogs" class="admin-tab-pane">
+          <form id="form-new-blog" style="background:var(--bg-secondary); padding:18px; border-radius:10px; margin-bottom:20px; display:grid; gap:12px;">
+            <input type="text" id="new-b-title" class="form-input" placeholder="Article Title" required>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <input type="text" id="new-b-cat" class="form-input" placeholder="Category" required>
+              <input type="text" id="new-b-author" class="form-input" placeholder="Author" required>
+            </div>
+            <input type="text" id="new-b-excerpt" class="form-input" placeholder="Short Excerpt" required>
+            <textarea id="new-b-content" class="form-input" rows="4" placeholder="Full Article Content" required></textarea>
+            <button type="submit" class="btn-mint-glow" style="justify-content:center;">+ Publish Article Live</button>
+          </form>
+          <div id="blogs-list-container"></div>
+        </div>
+
+        <div id="tab-inquiries" class="admin-tab-pane"><div id="inquiries-list-container"></div></div>
+
+        <div id="tab-settings" class="admin-tab-pane">
+          <form id="form-platform-settings" style="max-width:600px; display:grid; gap:14px;">
+            <label class="form-label">Launchpad Price ($)</label><input type="number" id="setting-p1" class="form-input" value="400">
+            <label class="form-label">DTC Engine Price ($)</label><input type="number" id="setting-p2" class="form-input" value="500">
+            <label class="form-label">Brand Tagline</label><input type="text" id="setting-tagline" class="form-input">
+            <label class="form-label">Admin Master Key</label><input type="text" id="setting-admin-pass" class="form-input">
+            <label class="form-label">Privacy Summary Text</label><textarea id="setting-privacy" class="form-input" rows="3"></textarea>
+            <button type="submit" class="btn-mint-glow" style="justify-content:center;">Save Global Settings</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="edit-proj-modal" class="edit-modal-overlay">
+    <div class="edit-modal-box">
+      <h3 style="margin-bottom:14px;">Edit Project</h3>
+      <form id="form-edit-project" style="display:grid; gap:10px;">
+        <input type="hidden" id="edit-p-id">
+        <input type="text" id="edit-p-title" class="form-input" required>
+        <input type="text" id="edit-p-tagline" class="form-input">
+        <textarea id="edit-p-solution" class="form-input" rows="3"></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" id="btn-cancel-edit-proj" class="btn-sage-outline">Cancel</button>
+          <button type="submit" class="btn-mint-glow">Save Updates</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="edit-blog-modal" class="edit-modal-overlay">
+    <div class="edit-modal-box">
+      <h3 style="margin-bottom:14px;">Edit Article</h3>
+      <form id="form-edit-blog" style="display:grid; gap:10px;">
+        <input type="hidden" id="edit-b-id">
+        <input type="text" id="edit-b-title" class="form-input" required>
+        <input type="text" id="edit-b-excerpt" class="form-input" required>
+        <textarea id="edit-b-content" class="form-input" rows="4" required></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" id="btn-cancel-edit-blog" class="btn-sage-outline">Cancel</button>
+          <button type="submit" class="btn-mint-glow">Save Updates</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-col">
+          <div class="brand-monogram" style="margin-bottom: 16px;">
+            <div class="brand-surge-icon"><svg viewBox="0 0 24 24"><path d="M4 19L9 5L14 14L18 8L20 10L14 19L9 10L6 19H4Z" /></svg></div>
+            <div class="brand-text-wrap"><span class="brand-name">NEXURA</span><span class="brand-sub">Tech & Business Acceleration</span></div>
+          </div>
+          <p style="color: var(--sage-muted); font-size: 0.9rem; line-height: 1.6; max-width: 320px;">
+            The dedicated specialist-squad creative agency. International-quality design, copy, and web engineering without bloated agency overhead.
+          </p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">SPECIALIST DISCIPLINES</div>
+          <ul class="footer-list">
+            <li><a href="webapps.html">01. Full-Stack Web App Engineering</a></li>
+            <li><a href="marketing.html">02. Conversion Copywriting & Funnels</a></li>
+            <li><a href="graphics.html">03. Editorial Graphic Design</a></li>
+            <li><a href="ai-automation.html">04. Autonomous AI Chatbots</a></li>
+            <li><a href="portfolio.html">Live Case Studies Portfolio</a></li>
+            <li><a href="blogs.html">Executive Insights & Blogs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">DIRECT CONTACT & LEGAL</div>
+          <ul class="footer-list">
+            <li><a href="https://wa.me/923332009848?text=Hello%20Nexura%2C%20I%20would%20like%20to%20discuss%20a%20project" target="_blank" class="whatsapp-highlight-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp: Direct Project Director Line</a></li>
+            <li><a href="pricing.html">Interactive Pricing & Scope Calculator</a></li>
+            <li><a href="privacy.html">Privacy Policy, NDA & 100% IP Transfer</a></li>
+            <li><a href="admin.html">Executive Admin Command Center</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Nexura International. All rights reserved. Craft over noise.</div>
+        <div style="display:flex; gap:20px;"><span>Specialist Architecture</span><span>100% Honest Positioning</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923332009848?text=Hello%20Nexura%2C%20I%20would%20like%20to%20discuss%20a%20project" target="_blank" class="floating-whatsapp-pill" title="Chat with Direct Project Director on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <div class="cookie-consent-bar hidden" id="cookie-consent-bar">
+    <div class="cookie-text">
+      <i class="fa-solid fa-cookie-bite" style="color:var(--mint-primary); margin-right:8px;"></i>
+      We use essential cookies to accelerate your user experience. View our <a href="privacy.html">Privacy Policy & Client Data Guarantee</a>.
+    </div>
+    <div class="cookie-actions">
+      <button class="btn-cookie-accept" id="btn-cookie-accept">Accept All</button>
+      <button class="btn-cookie-decline" id="btn-cookie-decline">Essential Only</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script>
+    let adminProjects = [], adminBlogs = [], adminInquiries = [], adminSettings = {};
+    const authGate = document.getElementById('admin-auth-gate');
+    const workspace = document.getElementById('admin-main-workspace');
+
+    async function unlock() {
+      authGate.style.display = 'none'; workspace.style.display = 'block';
+      sessionStorage.setItem('nexura_admin_authed', 'true');
+      const [p, b, i, s] = await Promise.all([
+        fetch('/api/projects').then(r=>r.json()), fetch('/api/blogs').then(r=>r.json()),
+        fetch('/api/inquiries').then(r=>r.json()), fetch('/api/settings').then(r=>r.json())
+      ]);
+      adminProjects = p.projects || []; adminBlogs = b.blogs || []; adminInquiries = i.inquiries || []; adminSettings = s.settings || {};
+      renderAdmin();
+    }
+    if (sessionStorage.getItem('nexura_admin_authed') === 'true') unlock();
+
+    document.getElementById('auth-form')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const pass = document.getElementById('auth-key-input').value.trim();
+      const res = await fetch('/api/admin/auth', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({pass}) });
+      if ((await res.json()).authorized) unlock();
+      else document.getElementById('auth-error-msg').style.display = 'block';
+    });
+
+    document.getElementById('btn-lock-console')?.addEventListener('click', () => {
+      sessionStorage.removeItem('nexura_admin_authed'); location.reload();
+    });
+
+    document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab-btn, .admin-tab-pane').forEach(el => el.classList.remove('active'));
+        btn.classList.add('active'); document.getElementById(btn.getAttribute('data-tab'))?.classList.add('active');
+      });
+    });
+
+    function renderAdmin() {
+      document.getElementById('stat-proj-count').textContent = adminProjects.length;
+      document.getElementById('stat-blog-count').textContent = adminBlogs.length;
+      document.getElementById('stat-inq-count').textContent = adminInquiries.length;
+      document.getElementById('stat-launchpad-val').textContent = '$' + (adminSettings.priceLaunchpad || 400);
+
+      const pBox = document.getElementById('projects-list-container');
+      pBox.innerHTML = '';
+      adminProjects.forEach(p => {
+        const d = document.createElement('div'); d.className = 'item-crud-card';
+        d.innerHTML = `<div><strong>${escapeHTML(p.title)}</strong> <small>[${escapeHTML(p.category)}]</small></div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-sage-outline edit-p" data-id="${p.id}">Edit</button>
+            <button class="btn-sage-outline del-p" data-id="${p.id}" style="color:#DC2626;">Delete</button>
+          </div>`;
+        pBox.appendChild(d);
+      });
+      pBox.querySelectorAll('.edit-p').forEach(btn => btn.addEventListener('click', () => {
+        const p = adminProjects.find(x => x.id === btn.dataset.id);
+        document.getElementById('edit-p-id').value = p.id;
+        document.getElementById('edit-p-title').value = p.title;
+        document.getElementById('edit-p-tagline').value = p.tagline || '';
+        document.getElementById('edit-p-solution').value = p.solution || '';
+        document.getElementById('edit-proj-modal').classList.add('open');
+      }));
+      pBox.querySelectorAll('.del-p').forEach(btn => btn.addEventListener('click', async () => {
+        await fetch('/api/projects/' + btn.dataset.id, { method:'DELETE' }); unlock();
+      }));
+
+      const bBox = document.getElementById('blogs-list-container');
+      bBox.innerHTML = '';
+      adminBlogs.forEach(b => {
+        const d = document.createElement('div'); d.className = 'item-crud-card';
+        d.innerHTML = `<div><strong>${escapeHTML(b.title)}</strong></div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-sage-outline edit-b" data-id="${b.id}">Edit</button>
+            <button class="btn-sage-outline del-b" data-id="${b.id}" style="color:#DC2626;">Delete</button>
+          </div>`;
+        bBox.appendChild(d);
+      });
+      bBox.querySelectorAll('.edit-b').forEach(btn => btn.addEventListener('click', () => {
+        const b = adminBlogs.find(x => x.id === btn.dataset.id);
+        document.getElementById('edit-b-id').value = b.id;
+        document.getElementById('edit-b-title').value = b.title;
+        document.getElementById('edit-b-excerpt').value = b.excerpt || '';
+        document.getElementById('edit-b-content').value = b.content || '';
+        document.getElementById('edit-blog-modal').classList.add('open');
+      }));
+      bBox.querySelectorAll('.del-b').forEach(btn => btn.addEventListener('click', async () => {
+        await fetch('/api/blogs/' + btn.dataset.id, { method:'DELETE' }); unlock();
+      }));
+
+      const iBox = document.getElementById('inquiries-list-container');
+      iBox.innerHTML = '';
+      adminInquiries.forEach(inq => {
+        const d = document.createElement('div'); d.className = 'item-crud-card';
+        d.innerHTML = `<div style="width:100%;">
+          <div style="display:flex; justify-content:space-between;"><strong>${escapeHTML(inq.name)} (${escapeHTML(inq.package)})</strong><button class="btn-sage-outline del-i" data-id="${inq.id}" style="color:#DC2626;">Delete</button></div>
+          <p style="font-size:0.86rem; margin:6px 0;">"${escapeHTML(inq.message)}"</p>
+          <p style="font-size:0.82rem; color:var(--sage-brand); margin-bottom:8px;">${escapeHTML(inq.reply)}</p>
+          <form class="reply-f" data-id="${inq.id}" style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="Official reply..." required><button class="btn-mint-glow">Reply</button></form>
+        </div>`;
+        iBox.appendChild(d);
+      });
+      iBox.querySelectorAll('.reply-f').forEach(f => f.addEventListener('submit', async e => {
+        e.preventDefault();
+        await fetch('/api/inquiries/' + f.dataset.id + '/reply', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ reply: f.querySelector('input').value }) });
+        unlock();
+      }));
+      iBox.querySelectorAll('.del-i').forEach(btn => btn.addEventListener('click', async () => {
+        await fetch('/api/inquiries/' + btn.dataset.id, { method:'DELETE' }); unlock();
+      }));
+
+      document.getElementById('setting-p1').value = adminSettings.priceLaunchpad || 400;
+      document.getElementById('setting-p2').value = adminSettings.priceDtc || 500;
+      document.getElementById('setting-tagline').value = adminSettings.tagline || '';
+      document.getElementById('setting-admin-pass').value = adminSettings.adminPass || 'nexura2026';
+      document.getElementById('setting-privacy').value = adminSettings.privacyText || '';
+    }
+
+    document.getElementById('form-new-project')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      await fetch('/api/projects', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({
+        title: document.getElementById('new-p-title').value, category: document.getElementById('new-p-cat').value,
+        tagline: document.getElementById('new-p-tagline').value, url: document.getElementById('new-p-url').value,
+        solution: document.getElementById('new-p-solution').value
+      })}); e.target.reset(); unlock();
+    });
+
+    document.getElementById('form-edit-project')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = document.getElementById('edit-p-id').value;
+      await fetch('/api/projects/' + id, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({
+        title: document.getElementById('edit-p-title').value, tagline: document.getElementById('edit-p-tagline').value, solution: document.getElementById('edit-p-solution').value
+      })}); document.getElementById('edit-proj-modal').classList.remove('open'); unlock();
+    });
+    document.getElementById('btn-cancel-edit-proj')?.addEventListener('click', () => document.getElementById('edit-proj-modal').classList.remove('open'));
+
+    document.getElementById('form-new-blog')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      await fetch('/api/blogs', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({
+        title: document.getElementById('new-b-title').value, category: document.getElementById('new-b-cat').value,
+        author: document.getElementById('new-b-author').value, excerpt: document.getElementById('new-b-excerpt').value, content: document.getElementById('new-b-content').value
+      })}); e.target.reset(); unlock();
+    });
+
+    document.getElementById('form-edit-blog')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = document.getElementById('edit-b-id').value;
+      await fetch('/api/blogs/' + id, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({
+        title: document.getElementById('edit-b-title').value, excerpt: document.getElementById('edit-b-excerpt').value, content: document.getElementById('edit-b-content').value
+      })}); document.getElementById('edit-blog-modal').classList.remove('open'); unlock();
+    });
+    document.getElementById('btn-cancel-edit-blog')?.addEventListener('click', () => document.getElementById('edit-blog-modal').classList.remove('open'));
+
+    document.getElementById('form-platform-settings')?.addEventListener('submit', async e => {
+      e.preventDefault();
+      await fetch('/api/settings', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({
+        priceLaunchpad: parseInt(document.getElementById('setting-p1').value) || 400,
+        priceDtc: parseInt(document.getElementById('setting-p2').value) || 500,
+        tagline: document.getElementById('setting-tagline').value,
+        adminPass: document.getElementById('setting-admin-pass').value,
+        privacyText: document.getElementById('setting-privacy').value
+      })}); alert('Global Settings Saved!'); unlock();
+    });
+  </script>
+</body>
+</html>

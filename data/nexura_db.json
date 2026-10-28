@@ -1,0 +1,126 @@
+{
+  "settings": {
+    "brandName": "NEXURA",
+    "tagline": "Tech & Business Acceleration",
+    "priceLaunchpad": 400,
+    "priceDtc": 500,
+    "adminPass": "nexura2026",
+    "privacyText": "Nexura adheres to global data privacy frameworks (GDPR & CCPA). Upon project delivery and milestone completion, 100% intellectual property (code, designs, copy) is formally transferred to the client under a strict Non-Disclosure Agreement (NDA). We never sell or share client data with third parties."
+  },
+  "projects": [
+    {
+      "id": "proj_gts",
+      "title": "GTS (Gadeix Technical Services)",
+      "category": "webapps",
+      "categoryLabel": "High-Ticket Web App & Lead Engine",
+      "location": "Dubai, UAE",
+      "tagline": "Ultra-Luxury Technical Renovation & Fit-Out Platform",
+      "clientProblem": "Standing out in Dubai's hyper-competitive luxury villa renovation market where standard contractor websites failed to attract high-net-worth homeowners.",
+      "solution": "Engineered an authority-driven web platform with bespoke interactive estimation calculators, VIP WhatsApp concierge flows, and prestige copywriting tailored for Dubai developers.",
+      "techStack": "Custom Vanilla JavaScript, CSS Glassmorphism, Node.js Backend, Lead Calculator API",
+      "url": "https://gts.thegenesisgroup.holdings",
+      "status": "Live & Generating Leads",
+      "icon": "fa-trowel-bricks",
+      "badge": "Proven Dubai Case Study"
+    },
+    {
+      "id": "proj_rawan",
+      "title": "Rawan Elite Footwear",
+      "category": "ecommerce",
+      "categoryLabel": "Custom DTC eCommerce Architecture",
+      "location": "Pakistan & International DTC",
+      "tagline": "High-Converting Handcrafted Leather Footwear Store",
+      "clientProblem": "Competing directly with European luxury footwear brands required luxury brand storytelling, flawless visual merchandising, and frictionless mobile checkout.",
+      "solution": "Architected a custom DTC eCommerce web app featuring an asynchronous slide cart, real-time courier order tracking, customer journal CMS, and high-converting product pages with zero lag.",
+      "techStack": "Single-Page Web Store Engine, LocalStorage Cart Cache, Dynamic Order Tracking API",
+      "url": "https://rawan.thegenesisgroup.holdings",
+      "status": "Active & Scaling Sales",
+      "icon": "fa-shoe-prints",
+      "badge": "High-Volume DTC"
+    },
+    {
+      "id": "proj_purevillage",
+      "title": "Pure Village / Pak Village Foods",
+      "category": "webapps",
+      "categoryLabel": "Global Agro-Commodities & Export Portal",
+      "location": "Global Export (UK, GCC, Asia)",
+      "tagline": "Certified Organic Agro-Export & B2B Wholesale Portal",
+      "clientProblem": "Bridging fertile artisanal rural farming with strict international export buyers requiring verified quality certifications, lab tests, and container quotes.",
+      "solution": "Built a transparent B2B export platform showcasing certified grain purity, interactive wholesale spec sheets, and container-level quotation request funnels.",
+      "techStack": "Custom UI Engine, B2B Quotation Form, Global Supply Chain Merchandising",
+      "url": "https://purevillage.thegenesisgroup.holdings",
+      "status": "Live & Export Ready",
+      "icon": "fa-wheat-awn",
+      "badge": "International B2B"
+    },
+    {
+      "id": "proj_campaigns",
+      "title": "Commercial Plaza Campaign",
+      "category": "marketing",
+      "categoryLabel": "Targeted Real Estate Ad Campaign",
+      "location": "Commercial Corridors",
+      "tagline": "High-Impact Commercial Retail Leasing Funnel",
+      "clientProblem": "Slow leasing velocity for prime commercial plaza floors with traditional broker listings.",
+      "solution": "Deployed a dedicated digital campaign funnel with video walkthroughs, floorplan selectors, and direct investor lead scoring.",
+      "techStack": "Conversion Funnel, Video Optimization, Direct Lead Capture",
+      "url": "portfolio.html",
+      "status": "Successful Deployment",
+      "icon": "fa-building-wheat",
+      "badge": "Commercial Campaign"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog_1",
+      "title": "The Traditional Agency Trap: Why Foreign Founders Are Overbilled by $30,000",
+      "category": "Strategy & Pricing",
+      "author": "Nexura Strategy Board",
+      "date": "Oct 24, 2026",
+      "readTime": "4 min read",
+      "excerpt": "How bloated Western agencies use base quotes as bait and hit clients with unexpected add-on invoices for copywriting, graphics, and speed tuning.",
+      "content": "When foreign business owners hire traditional digital agencies in New York, London, or Sydney, they routinely receive proposals starting at $25,000 to $50,000.\n\nWhat most founders don't realize is that these quotes are deliberately hollow. Within three weeks, the agency reveals that copywriting is extra ($5,000), graphics are not included ($4,000), and speed optimization requires a monthly retainer.\n\nAt Nexura, we eliminated this predatory structure. We operate on a direct engineering sprint model: full-stack code, direct response sales copy, and custom UI graphics delivered together at flat, transparent rates ($400-$500) with zero surprise fees."
+    },
+    {
+      "id": "blog_2",
+      "title": "From Code to High-Ticket Conversions: The Architecture Behind GTS Dubai",
+      "category": "Web Engineering",
+      "author": "Lead Tech Architect",
+      "date": "Oct 19, 2026",
+      "readTime": "5 min read",
+      "excerpt": "A deep dive into how we built an interactive renovation estimation calculator that converts cold Dubai traffic into VIP villa fit-out inquiries.",
+      "content": "In a luxury market like Dubai, generic contact forms have an abysmal 1.2% conversion rate. Ultra-high-net-worth clients want immediate numbers and effortless concierge access.\n\nWhen engineering GTS (Gadeix Technical Services), we implemented an interactive budget estimator coupled with instant WhatsApp dispatch. This single feature reduced client qualification time by 80% and generated 4x more qualified inquiries in the first 30 days."
+    },
+    {
+      "id": "blog_3",
+      "title": "Why AI Chatbots Outperform Traditional Static Contact Forms by 300%",
+      "category": "AI Automation",
+      "author": "AI Systems Director",
+      "date": "Oct 12, 2026",
+      "readTime": "3 min read",
+      "excerpt": "How autonomous conversational AI concierges capture international buyers in different time zones while your team is asleep.",
+      "content": "International clients often browse your website at 2:00 AM in your time zone. If they only see a static contact form that says 'We will get back to you in 48 hours', 65% of them leave and purchase from a competitor.\n\nNexura's Neural AI Chatbots engage visitors instantly, answer complex questions about your deliverables and pricing, and collect qualified project briefs before the lead goes cold."
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq_1",
+      "name": "Marcus Vance",
+      "company": "Vance Technical Group (London, UK)",
+      "email": "m.vance@vancetech.co.uk",
+      "package": "$400 Service Launchpad",
+      "message": "We need a complete technical service web platform similar to the GTS Dubai model with interactive quote estimation. Does the $400 quote include all copy and graphics?",
+      "date": "Yesterday",
+      "reply": "Official Nexura Dispatch: Yes Marcus. The $400 Launchpad is 100% turnkey. All technical copywriting, custom iconography, mobile performance tuning, and lead funnels are included with zero add-on charges. We can deliver within 14 business days."
+    },
+    {
+      "id": "inq_2",
+      "name": "Sophia Lindqvist",
+      "company": "Nordic Atelier (Stockholm / US)",
+      "email": "sophia@nordicatelier.com",
+      "package": "$500 DTC eCommerce Engine",
+      "message": "Loved the Rawan footwear case study! We are launching a curated leather accessories line for the US market. Can we integrate Stripe and custom order tracking?",
+      "date": "2 days ago",
+      "reply": "Official Nexura Dispatch: Absolutely Sophia. Stripe, PayPal, asynchronous slide-out cart, and custom order tracking are built-in features of our $500 DTC Acceleration Engine. You own 100% of the code."
+    }
+  ]
+}

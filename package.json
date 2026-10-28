@@ -1,0 +1,19 @@
+{
+  "name": "nexura-tech-business-acceleration",
+  "version": "2.0.0",
+  "description": "Nexura Tech & Business Acceleration — Turnkey Web Applications & Revenue Acceleration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "webapps",
+    "ecommerce",
+    "acceleration",
+    "full-stack",
+    "nexura"
+  ],
+  "author": "Nexura Global",
+  "license": "ISC"
+}

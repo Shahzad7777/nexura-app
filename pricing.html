@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transparent Flat-Rate Pricing & Calculator ($400 - $500) | Nexura</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="ambient-network-canvas"></canvas>
+  
+  <header class="glass-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-monogram">
+        <div class="brand-surge-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19L9 5L14 14L18 8L20 10L14 19L9 10L6 19H4Z" /></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">NEXURA</span>
+          <span class="brand-sub">Tech & Business Acceleration</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item ">Home</a>
+        <a href="webapps.html" class="nav-item ">Web Apps</a>
+        <a href="marketing.html" class="nav-item ">Marketing</a>
+        <a href="graphics.html" class="nav-item ">Graphic Design</a>
+        <a href="ai-automation.html" class="nav-item ">AI Automation</a>
+        <a href="portfolio.html" class="nav-item ">Case Studies</a>
+        <a href="pricing.html" class="nav-item active">Pricing ($400-$500)</a>
+        <a href="blogs.html" class="nav-item ">Blogs</a>
+        <a href="privacy.html" class="nav-item ">Privacy Policy</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="admin.html" class="btn-admin-pill"><i class="fa-solid fa-sliders"></i> Admin Portal</a>
+        <a href="pricing.html" class="btn-mint-glow">Start Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </header>
+  <main class="page-container">
+    <section class="page-hero-section"><div class="container text-center">
+      <span class="section-tag">PREDICTABLE INVESTMENT</span>
+      <h1 class="page-main-title">World-Class Execution. <br><span class="mint-gradient-text">Fair, Transparent Pricing.</span></h1>
+    </div></section>
+    <section class="section-padded"><div class="container">
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div>
+            <h3 class="price-tier-name">Service Launchpad</h3>
+            <div class="price-amount-box"><span class="price-num" id="price-val-launchpad">$400</span><span>/ Flat Fee</span></div>
+            <ul class="price-features-list">
+              <li><i class="fa-solid fa-check"></i> Custom Web Platform (Up to 5 Pages)</li>
+              <li><i class="fa-solid fa-check"></i> Complete Conversion Copywriting Included</li>
+              <li><i class="fa-solid fa-check"></i> Custom Vector Graphics & Icons Included</li>
+              <li><i class="fa-solid fa-check"></i> Interactive Estimation / Quote Funnel</li>
+            </ul>
+          </div>
+          <button class="btn-mint-glow btn-choose-package" data-package="$400 Service Launchpad" style="justify-content:center;">Choose $400 Launchpad</button>
+        </div>
+        <div class="price-card featured">
+          <div>
+            <div class="price-featured-badge">MOST POPULAR</div>
+            <h3 class="price-tier-name">DTC eCommerce Engine</h3>
+            <div class="price-amount-box"><span class="price-num" id="price-val-dtc">$500</span><span>/ Flat Fee</span></div>
+            <ul class="price-features-list">
+              <li><i class="fa-solid fa-check"></i> Custom eCommerce Store Architecture</li>
+              <li><i class="fa-solid fa-check"></i> Asynchronous Slide-Out Cart & Checkout</li>
+              <li><i class="fa-solid fa-check"></i> Live Order Tracking API System</li>
+              <li><i class="fa-solid fa-check"></i> All Product Copy & Visuals Included</li>
+            </ul>
+          </div>
+          <button class="btn-mint-glow btn-choose-package" data-package="$500 DTC eCommerce Engine" style="justify-content:center;">Choose $500 DTC Engine</button>
+        </div>
+      </div>
+
+      <div class="calculator-card" id="interactive-price-calculator">
+        <span class="section-tag"><i class="fa-solid fa-calculator"></i> REAL-TIME SCOPE & PRICE ESTIMATOR</span>
+        <h3 style="font-family:var(--font-display); font-size:1.6rem; margin-bottom:18px;">Customize Your Acceleration Sprint</h3>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group">
+              <label>1. Select Base Architecture</label>
+              <select id="calc-base-tier" class="form-select">
+                <option value="400">Service Launchpad ($400 Base)</option>
+                <option value="500">DTC eCommerce Engine ($500 Base)</option>
+              </select>
+            </div>
+            <label class="form-label">2. Optional Power-Up Modules</label>
+            <div class="calc-options-list">
+              <label class="calc-option-label"><input type="checkbox" class="calc-addon-check" value="100" data-name="24/7 Neural AI Chatbot"><span>24/7 AI Chatbot (+$100)</span></label>
+              <label class="calc-option-label"><input type="checkbox" class="calc-addon-check" value="75" data-name="3D Product Mockup Pack"><span>3D Mockup Pack (+$75)</span></label>
+              <label class="calc-option-label"><input type="checkbox" class="calc-addon-check" value="80" data-name="Multi-Language / Currency"><span>Multi-Currency (+$80)</span></label>
+              <label class="calc-option-label"><input type="checkbox" class="calc-addon-check" value="50" data-name="Priority 7-Day Express"><span>7-Day Express (+$50)</span></label>
+            </div>
+          </div>
+          <div class="calc-summary-box">
+            <span style="font-family:var(--font-mono); font-size:0.75rem;">ESTIMATED TURNKEY TOTAL</span>
+            <div class="calc-total-price" id="calc-total-val">$400</div>
+            <button type="button" class="btn-mint-glow" id="btn-lock-estimate" style="width:100%; justify-content:center; background:var(--mint-primary); color:#111714;">Lock Estimate Into Brief <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="reviews-section bg-secondary"><div class="container">
+      <div class="reviews-grid">
+        <div class="inquiry-form-card">
+          <span class="section-tag">START YOUR SPRINT</span>
+          <h3 style="font-family:var(--font-display); font-size:1.7rem; margin-bottom:16px;">Lock In Your 24-Hour Roadmap</h3>
+          <form id="inquiry-form">
+            <div class="form-row">
+              <div class="form-group"><label>Full Name</label><input type="text" id="inq-name" required></div>
+              <div class="form-group"><label>Work Email</label><input type="email" id="inq-email" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Company</label><input type="text" id="inq-company"></div>
+              <div class="form-group"><label>Package</label>
+                <select id="inq-package">
+                  <option value="$400 Service Launchpad">$400 Service Launchpad</option>
+                  <option value="$500 DTC eCommerce Engine">$500 DTC eCommerce Engine</option>
+                  <option value="Custom Enterprise Sprint">Custom Enterprise Sprint</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group"><label>Project Brief</label><textarea id="inq-message" rows="4" required></textarea></div>
+            <button type="submit" class="btn-mint-glow" style="width:100%; justify-content:center;">Submit Project Brief <i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+        <div class="reviews-feed-card">
+          <div class="feed-header"><h4>Verified Inquiries & Official Replies</h4><span class="case-badge-pill"><span id="feed-count-badge">0</span> Active</span></div>
+          <div class="feed-scroll-box" id="public-inquiries-feed"></div>
+        </div>
+      </div>
+    </div></section>
+  </main>
+  
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-col">
+          <div class="brand-monogram" style="margin-bottom: 16px;">
+            <div class="brand-surge-icon"><svg viewBox="0 0 24 24"><path d="M4 19L9 5L14 14L18 8L20 10L14 19L9 10L6 19H4Z" /></svg></div>
+            <div class="brand-text-wrap"><span class="brand-name">NEXURA</span><span class="brand-sub">Tech & Business Acceleration</span></div>
+          </div>
+          <p style="color: var(--sage-muted); font-size: 0.9rem; line-height: 1.6; max-width: 320px;">
+            The dedicated specialist-squad creative agency. International-quality design, copy, and web engineering without bloated agency overhead.
+          </p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">SPECIALIST DISCIPLINES</div>
+          <ul class="footer-list">
+            <li><a href="webapps.html">01. Full-Stack Web App Engineering</a></li>
+            <li><a href="marketing.html">02. Conversion Copywriting & Funnels</a></li>
+            <li><a href="graphics.html">03. Editorial Graphic Design</a></li>
+            <li><a href="ai-automation.html">04. Autonomous AI Chatbots</a></li>
+            <li><a href="portfolio.html">Live Case Studies Portfolio</a></li>
+            <li><a href="blogs.html">Executive Insights & Blogs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">DIRECT CONTACT & LEGAL</div>
+          <ul class="footer-list">
+            <li><a href="https://wa.me/923332009848?text=Hello%20Nexura%2C%20I%20would%20like%20to%20discuss%20a%20project" target="_blank" class="whatsapp-highlight-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp: Direct Project Director Line</a></li>
+            <li><a href="pricing.html">Interactive Pricing & Scope Calculator</a></li>
+            <li><a href="privacy.html">Privacy Policy, NDA & 100% IP Transfer</a></li>
+            <li><a href="admin.html">Executive Admin Command Center</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Nexura International. All rights reserved. Craft over noise.</div>
+        <div style="display:flex; gap:20px;"><span>Specialist Architecture</span><span>100% Honest Positioning</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923332009848?text=Hello%20Nexura%2C%20I%20would%20like%20to%20discuss%20a%20project" target="_blank" class="floating-whatsapp-pill" title="Chat with Direct Project Director on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <div class="cookie-consent-bar hidden" id="cookie-consent-bar">
+    <div class="cookie-text">
+      <i class="fa-solid fa-cookie-bite" style="color:var(--mint-primary); margin-right:8px;"></i>
+      We use essential cookies to accelerate your user experience. View our <a href="privacy.html">Privacy Policy & Client Data Guarantee</a>.
+    </div>
+    <div class="cookie-actions">
+      <button class="btn-cookie-accept" id="btn-cookie-accept">Accept All</button>
+      <button class="btn-cookie-decline" id="btn-cookie-decline">Essential Only</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
